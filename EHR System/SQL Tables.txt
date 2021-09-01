@@ -1,0 +1,109 @@
+CREATE TABLE employee (
+    emp_ic VARCHAR(12) NOT NULL PRIMARY KEY,
+    emp_name VARCHAR(70) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    emp_role VARCHAR(20),
+    department VARCHAR(20),
+    rpi_id VARCHAR(6) DEFAULT 0,
+    hospital_id VARCHAR(8) NOT NULL,
+    emp_reg_dt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE patient (
+    patient_ic VARCHAR(12) NOT NULL PRIMARY KEY,
+    fingerprint_encoding MEDIUMTEXT NOT NULL DEFAULT 000000,
+    patient_name VARCHAR(70) NOT NULL,
+    gender VARCHAR(6) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    blood_type VARCHAR(2) NOT NULL,
+    nationality VARCHAR(20) NOT NULL,
+    ethnicity VARCHAR(20) NOT NULL,
+    phone VARCHAR(12) NOT NULL,
+    verify TINYINT(1) NOT NULL DEFAULT 0,
+    hospital_id VARCHAR(8) DEFAULT 0,
+    patient_reg_dt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE patient_history (
+    patient_ic VARCHAR(12) NOT NULL PRIMARY KEY,
+    chief_complaint VARCHAR(1000),
+    present_history VARCHAR(1000),
+    past_history VARCHAR(1000),
+    medication VARCHAR(1000),
+    allergy VARCHAR(1000),
+    family_history VARCHAR(1000),
+    social_history VARCHAR(1000),
+    emp_name VARCHAR(70) NOT NULL,  
+    history_modi_dt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE medical_report (
+    med_report_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_ic VARCHAR(12),
+    symptom VARCHAR(1000) NOT NULL,
+    diagnosis VARCHAR(1000) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    prognosis VARCHAR(1000) NOT NULL,
+    emp_name VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    hospital_id VARCHAR(8) NOT NULL,
+    report_submit_dt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE lab_report (
+    lab_report_id INT PRIMARY KEY AUTO_INCREMENT,
+    patient_ic VARCHAR(12),
+    lab_test_type VARCHAR(50),
+    wbc_count VARCHAR(20), 
+    rbc_count VARCHAR(20), 
+    hct_test VARCHAR(20), 
+    mcv_test VARCHAR(20), 
+    mch_test VARCHAR(20), 
+    rcdw_test VARCHAR(20), 
+    platelet_count VARCHAR(20), 
+    mpv VARCHAR(20), 
+    polymorphs VARCHAR(20), 
+    lymphocytes VARCHAR(20), 
+    monocytes VARCHAR(20), 
+    eosinophils VARCHAR(20), 
+    basophils VARCHAR(20), 
+    ft4 VARCHAR(20), 
+    rheumatoid_factor VARCHAR(20), 
+    afp VARCHAR(20), 
+    hav VARCHAR(20), 
+    ph VARCHAR(20), 
+    protein VARCHAR(20), 
+    glucose VARCHAR(20), 
+    ketone VARCHAR(20), 
+    blood VARCHAR(20), 
+    colour VARCHAR(20), 
+    transparency VARCHAR(20), 
+    specific_gravity VARCHAR(20), 
+    sodium VARCHAR(20), 
+    potassium VARCHAR(20), 
+    chloride VARCHAR(20), 
+    urea VARCHAR(20), 
+    creatinine VARCHAR(20), 
+    gfr VARCHAR(20), 
+    calcium VARCHAR(20), 
+    phosphorus VARCHAR(20), 
+    uric_acid VARCHAR(20), 
+    syphilis VARCHAR(20),
+    emp_name VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    hospital_id VARCHAR(8) NOT NULL,
+    report_submit_dt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE doctor_patient (
+    patient_ic VARCHAR(20),
+    emp_ic VARCHAR(20)
+);
+
+CREATE TABLE hardware (
+    rpi_id VARCHAR(6) NOT NULL PRIMARY KEY,
+    patient_ic VARCHAR(20) NOT NULL DEFAULT 0,
+    operation VARCHAR(2) NOT NULL DEFAULT 0
+);
+
+INSERT INTO hardware (rpi_id) VALUES ("rpi001");
